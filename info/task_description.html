@@ -1,20 +1,16 @@
 <!-- Describe task in general -->
 
 <p>
-    Sum two passed ints
-</p>
-
-<p style="text-align: center;">
-    <img  title="example" src="{{MEDIA}}example.png" alt="example" style="max-height: 83px"/>
-</p>
-
-<!-- Explain input and output values -->
-<p>
-    <strong>Input: </strong> Two arguments. Both are int
+    
+This function creates a {% if interpreter.slug == "js-node" %}Array of arrays.{% else %}List of lists.{% endif %} that represents a two-dimensional grid with the given number of rows and  cols . This grid should contain the integers from  <code>start</code> to  <code>start + rows * cols - 1</code> in ascending order, but so that the elements of every odd-numbered row are listed in descending order, so that when read in ascending order, the numbers zigzag through the two-dimensional grid.
 </p>
 
 <p>
-    <strong>Output: </strong> Int. 
+    <strong>Input: </strong> Two ints rows and cols. And one optional argument start.
+</p>
+
+<p>
+    <strong>Output: </strong> {% if interpreter.slug == "js-node" %}Array of arrays.{% else %}List of lists.{% endif %}
 </p>
 
 
@@ -25,25 +21,46 @@
     </p>
 
 {% if interpreter.slug == "js-node" %}
-<pre class="brush: javascript">sumTwo(2, 3) == 5
-sumTwo(5, 7) == 12
+<pre class="brush: javascript">createZigzag(3, 5) == [
+        [1,2,3,4,5],
+        [10,9,8,7,6],
+        [11,12,13,14,15]
+    ]
+createZigzag(5, 1) == [
+        [1],
+        [2],
+        [3],
+        [4],
+        [5]
+    ]
+createZigzag(2, 3, 5) == [
+        [5, 6, 7],
+        [10, 9, 8],
+        [11, 12, 13]
+    ]
 </pre>
 {% else %}
-<pre class="brush: python">sum_two(2, 3) == 5
-sum_two(5, 7) == 12
+<pre class="brush: python">
+create_zigzag(3, 5) == [
+        [1,2,3,4,5],
+        [10,9,8,7,6],
+        [11,12,13,14,15]
+    ]
+create_zigzag(5, 1) == [
+        [1],
+        [2],
+        [3],
+        [4],
+        [5]
+    ]
+create_zigzag(2, 3, 5) == [
+        [5, 6, 7],
+        [10, 9, 8],
+        [11, 12, 13]
+    ]
 </pre>
 {% endif %}
 </div>
-<!-- Here you can explain how it can be used in development and what is usage of this. -->
-<!-- The section is optional -->
-<p class="for_info_only">
-    <strong>How it is used: </strong>
-    <i>(math is used everywhere)</i>
-</p>
 
-<!-- Here you can explain some constraints for input-->
-<!-- The section is optional -->
-<p>
-    <strong>Precondition:</strong>
-    <i>both given ints should be between -1000 and 1000</i>
-</p>
+
+<p><i>The mission was taken from Python CCPS 109 Fall 2018. It is taught for Ryerson Chang School of Continuing Education by <a href="http://www.scs.ryerson.ca/~ikokkari/">Ilkka Kokkarinen</a></i></p>
