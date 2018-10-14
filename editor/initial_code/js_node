@@ -10,7 +10,7 @@ function createZigzag(rows, cols, stars) {
 var assert = require('assert');
 if (!global.is_checking) {
     console.log('Example:')
-    console.log(createZigzag(2, 3, 5))
+    console.log(createZigzag(3, 3, 5))
 
     // These "asserts" are used for self-checking and not for an auto-testing
     assert.deepEqual(createZigzag(3, 5), [
@@ -25,7 +25,7 @@ if (!global.is_checking) {
         [4],
         [5]
     ])
-    assert.deepEqual(createZigzag(2, 3, 5), [
+    assert.deepEqual(createZigzag(3, 3, 5), [
         [5, 6, 7],
         [10, 9, 8],
         [11, 12, 13]
@@ -33,7 +33,7 @@ if (!global.is_checking) {
 
     // Edge cases
     assert.deepEqual(createZigzag(0, 3), [])
-    assert.deepEqual(createZigzag(3, 0), [])
+    assert.deepEqual(createZigzag(3, 0), [[], [], []])
     assert.deepEqual(createZigzag(0, 0), [])
 
     console.log("Coding complete? Click 'Check' to earn cool rewards!");

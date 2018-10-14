@@ -25,7 +25,7 @@ TESTS = {
                 ]
         },
         {
-            "input": [2, 3, 5],
+            "input": [3, 3, 5],
             "answer": [
                 [5, 6, 7],
                 [10, 9, 8],
@@ -41,8 +41,8 @@ TESTS = {
         },
         {
             "input": [3, 0],
-            "answer": [],
-            "explanation": "no cols no data"
+            "answer": [[], [], []],
+            "explanation": "no cols but empty rows"
         },
         {
             "input": [0, 0],
