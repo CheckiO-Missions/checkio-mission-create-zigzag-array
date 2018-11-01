@@ -1,8 +1,6 @@
 "use strict";
 
-function createZigzag(rows, cols, stars) {
-    // sums two passed arguments
-
+function createZigzag(rows, cols, start) {
     // your code here
     return [];
 }
