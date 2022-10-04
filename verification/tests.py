@@ -12,7 +12,10 @@ TESTS = {
     "Basics": [
         {
             "input": [3, 5],
-            "answer": [[1,2,3,4,5],[10,9,8,7,6],[11,12,13,14,15]]
+            "answer": [
+                [1, 2, 3, 4, 5],
+                [10, 9, 8, 7, 6],
+                [11, 12, 13, 14, 15]],
         },
         {
             "input": [5, 1],
@@ -22,7 +25,7 @@ TESTS = {
                     [3],
                     [4],
                     [5]
-                ]
+                ],
         },
         {
             "input": [3, 3, 5],
@@ -30,31 +33,31 @@ TESTS = {
                 [5, 6, 7],
                 [10, 9, 8],
                 [11, 12, 13]
-            ]
+            ],
         }
     ],
     "Extra": [
         {
             "input": [0, 3],
             "answer": [],
-            "explanation": "no rows no data"
+            "explanation": "no rows no data",
         },
         {
             "input": [3, 0],
             "answer": [[], [], []],
-            "explanation": "no cols but empty rows"
+            "explanation": "no cols but empty rows",
         },
         {
             "input": [0, 0],
-            "answer": []
+            "answer": [],
         },
         {
             "input": [10, 1],
-            "answer": [[1],[2],[3],[4],[5],[6],[7],[8],[9],[10]]
+            "answer": [[1], [2], [3], [4], [5], [6], [7], [8], [9], [10]],
         },
         {
             "input": [4, 2],
-            "answer": [[1,2],[4,3],[5,6],[8,7]]
+            "answer": [[1, 2], [4, 3], [5, 6], [8, 7]],
         }
     ]
 }

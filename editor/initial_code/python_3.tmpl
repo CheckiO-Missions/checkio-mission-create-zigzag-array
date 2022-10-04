@@ -1,0 +1,22 @@
+{% comment %}New initial code template{% endcomment %}
+{% block env %}{% endblock env %}
+
+{% block start %}
+def create_zigzag(rows: int, cols: int, start: int = 1) -> list[list[int]]:
+    # your code here
+    return [[]]
+{% endblock start %}
+
+{% block example %}
+print('Example:')
+print(create_zigzag(3, 5))
+{% endblock %}
+
+{% block tests %}
+{% for t in tests %}
+assert {% block call %}create_zigzag({{t.input|p_args}}){% endblock %} == {% block result %}{{t.answer|p}}{% endblock %}{% endfor %}
+{% endblock %}
+
+{% block final %}
+print("The mission is done! Click 'Check Solution' to earn rewards!")
+{% endblock final %}
