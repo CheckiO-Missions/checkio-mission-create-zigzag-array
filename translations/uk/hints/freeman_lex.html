@@ -11,13 +11,13 @@
 </div>
 <div class="question-answer">
     <div class="question">
-        З якого інструмент мені розпочати?
+        З якого інструменту мені розпочати?
     </div>
     <div class="answer">
         <p>Використай <a target="_blank" href="https://www.w3schools.com/python/python_lists_comprehension.asp">списковий вираз</a>
         і <a target="_blank" href="https://www.w3schools.com/python/python_for_loops.asp">цикл or</a>,
         щоб створити необхідну кількість рядків шляхом ітерування по <b class="code">rows</b>
-        і відразу напиши вираз <b class="code">return</b> зі своїх результуючим списком (деяка інформація поки прихована).
+        і відразу напиши вираз <b class="code">return</b> зі своїм результуючим списком (деяка інформація поки прихована).
         </p>
         <pre class="brush: python">
 return [... for row_ind in range(rows)]
@@ -33,7 +33,7 @@ return [... for row_ind in range(rows)]
            <b class="code">start</b>, <b class="code">row_ind</b> і його колонку.
            Кожен рядок може бути записаний, як діапазон з кроком 1 і довжиною <b class="code">cols</b>. 
            Використовуючи цю логіку і оператор <a target="_blank" href="https://realpython.com/python-walrus-operator/">walrus</a>
-           дял компактного запису, ти можеш написати шаблон для кожного рядка і 
+           для компактного запису, ти можеш написати шаблон для кожного рядка і 
            додати його в свій <b class="code">return</b> вираз:
         </p>
         <pre class="brush: python">
@@ -107,7 +107,7 @@ def create_zigzag(rows: int, cols: int, start: int = 1) -> list[list[int]]:
         кількість значень і обертаєш рядки, якщо потрібно. Оскільки в Python
         нумерація індексів розпочинається з 0, парні елементи в нормальному порядку мають
         непарний індекс, тому <b class="code">-1</b> в непарному степені лишається <b class="code">-1</b>
-        і як крок у зрізування дає нам зворотній порядок.</p>
+        і як крок у зрізуванні дає нам зворотній порядок.</p>
         <pre class="brush: python">
 from itertools import count, islice
             
