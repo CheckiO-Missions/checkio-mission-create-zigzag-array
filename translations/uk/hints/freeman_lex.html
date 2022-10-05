@@ -1,0 +1,150 @@
+<body data-author="freeman_lex">
+<div class="question-answer">
+    <div class="question">
+        Я уявлення не маю, як розв'язати цю місію.
+    </div>
+    <div class="answer">
+        <p>Загалом ідея у тому, щоб створити у циклі <b class="code">rows</b> кількість рядків, 
+        з <b class="code">cols</b> кількістю відповідних елементів у кожному.
+        Рядки із непарним індексом в результатній сітці мають бути обернені.</p>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        З якого інструмент мені розпочати?
+    </div>
+    <div class="answer">
+        <p>Використай <a target="_blank" href="https://www.w3schools.com/python/python_lists_comprehension.asp">списковий вираз</a>
+        і <a target="_blank" href="https://www.w3schools.com/python/python_for_loops.asp">цикл or</a>,
+        щоб створити необхідну кількість рядків шляхом ітерування по <b class="code">rows</b>
+        і відразу напиши вираз <b class="code">return</b> зі своїх результуючим списком (деяка інформація поки прихована).
+        </p>
+        <pre class="brush: python">
+return [... for row_ind in range(rows)]
+        </pre>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        Як створити рядки з різними значеннями?
+    </div>
+    <div class="answer">
+        <p>Кожен елемент у сітці може бути розрахований і розміщений, використовуючи
+           <b class="code">start</b>, <b class="code">row_ind</b> і його колонку.
+           Кожен рядок може бути записаний, як діапазон з кроком 1 і довжиною <b class="code">cols</b>. 
+           Використовуючи цю логіку і оператор <a target="_blank" href="https://realpython.com/python-walrus-operator/">walrus</a>
+           дял компактного запису, ти можеш написати шаблон для кожного рядка і 
+           додати його в свій <b class="code">return</b> вираз:
+        </p>
+        <pre class="brush: python">
+return [range((s:=start + row_ind*cols), s + cols)
+        for row_ind in range(rows)] 
+        </pre>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        Але ж у цьому випадку всі рядки будуть у зростаючому порядку. Як змінити порядок
+        в рядках з непарним індексом?
+    </div>
+    <div class="answer">
+        <p>Так, ти правий. Для цієї мети використай вбудовану функцію
+            <a target="_blank" href="https://www.w3schools.com/python/ref_func_sorted.asp">sorted()</a>
+        з твоєю функцією <b class="code">range</b> як перший аргумент, 
+        і аргументом <b class="code">reverse</b>.</p>
+        <pre class="brush: python">
+return [sorted(range((s:=start + row_ind*cols), s + cols),
+               reverse=...)
+        for row_ind in range(rows)] 
+        </pre>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        Яким має бути значення аргументу <b class="code">reverse</b>?
+    </div>
+    <div class="answer">
+        <p>Твій аргумент <b class="code">reverse</b> має стати <b class="code">True</b>
+        для рядків з непарним індексом у сітці. Це означає, що <b class="code">reverse</b>
+        є <b class="code">True</b> коли <b class="code">row_ind</b> є <b class="code">1</b>,
+        <b class="code">3</b>, <b class="code">5</b> і т.д.</p>
+        <p>Така поведінка може бути легко запрограмована з допомогою оператора
+         <a target="_blank" href="https://realpython.com/python-modulo-operator/">modulo</a>,
+         який повертає <b class="code">1</b> для непарних чисел і <b class="code">0</b> для парних,
+        а також знаючи той факт, що Python може інтерпретувати (якщо потрібно) <b class="code">0</b>
+        як <b class="code">False</b> і всі інші числа як <b class="code">True</b>.</p>
+        <pre class="brush: python">
+return [sorted(range((s:=start + row_ind*cols), s + cols),
+               reverse=row_ind % 2)
+        for row_ind in range(rows)] 
+        </pre>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        То як має виглядати моє остаточне рішення?
+    </div>
+    <div class="answer">
+        <p>Все, що тобі потрібно - це додати визначення функції.</p>
+        <p>Ось повний розв'язок:</p>
+        <pre class="brush: python">
+def create_zigzag(rows: int, cols: int, start: int = 1) -> list[list[int]]:
+
+    return [sorted(range((s:=start + row_ind*cols), s + cols),
+                   reverse=row_ind % 2)
+            for row_ind in range(rows)] 
+        </pre>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        Покажи мені більше розв'язків!<br />
+        Адже я хочу бути справжнім Python Ніндзею!
+    </div>
+    <div class="answer">
+        <p>Звісно, тримай!</p>
+        <p>У цьому розв'язку ти "відтинаєш" від безкінечного лічильника <b class="code">cols</b>
+        кількість значень і обертаєш рядки, якщо потрібно. Оскільки в Python
+        нумерація індексів розпочинається з 0, парні елементи в нормальному порядку мають
+        непарний індекс, тому <b class="code">-1</b> в непарному степені лишається <b class="code">-1</b>
+        і як крок у зрізування дає нам зворотній порядок.</p>
+        <pre class="brush: python">
+from itertools import count, islice
+            
+
+def create_zigzag(rows: int, cols: int, start: int = 1) -> list[list[int]]:
+
+    it = count(start)
+
+    return [list(islice(it, cols))[::(-1)**row] for row in range(rows)]
+        </pre>
+        <p>Якщо залишилися якісь сумніви, ось покроковий розв'язок, який повинен
+            бути тобі більш зрозумілим за два попередні.
+        </p>
+        <pre class="brush: python">
+def create_zigzag(rows: int, cols: int, start: int = 1) -> list[list[int]]:
+
+    grid = []
+    for row_ind in range(rows):
+        row = []
+        for _ in range(cols):
+            row.append(start)
+            start += 1
+        if row_ind % 2:
+            row.reverse()
+        grid.append(row)
+
+    return grid
+        </pre>
+        <p>Тисни "Best solutions" в меню місії і побачиш багато інших цікавих розв'язків!</p>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        Дякую! Тепер я знаю і розумію більше! Все працює як слід!
+    </div>
+    <div class="answer">
+        Приємно це чути!
+    </div>
+</div>
+</body>

@@ -4,39 +4,79 @@
         I have no idea how to start solving this mission.
     </div>
     <div class="answer">
-        <p></p>
+        <p>The general idea is to create in a loop <b class="code">rows</b> number of rows, 
+        with <b class="code">cols</b> number of appropriate elements in each.
+        Rows with odd index in the result grid should be reversed.</p>
     </div>
 </div>
 <div class="question-answer">
     <div class="question">
-        
+        What instrument should I start from?
     </div>
     <div class="answer">
-        <p></p>
+        <p>Use <a target="_blank" href="https://www.w3schools.com/python/python_lists_comprehension.asp">list comprehension</a>
+        and <a target="_blank" href="https://www.w3schools.com/python/python_for_loops.asp">for loop</a>
+        to create necessary number of rows by iterating over the <b class="code">rows</b> and
+        already write <b class="code">return</b> statement with your final grid (with some hidden info yet)
+        </p>
         <pre class="brush: python">
-
+return [... for row_ind in range(rows)]
         </pre>
     </div>
 </div>
 <div class="question-answer">
     <div class="question">
-        
+        How to create rows with different values?
     </div>
     <div class="answer">
-        <p></p>
+        <p>Each element in the grid can be calculated and positioned using <b class="code">start</b>,
+            <b class="code">row_ind</b> and its column. Each row can be written
+            as a range with step 1 and length <b class="code">cols</b>. Using this
+            logic and <a target="_blank" href="https://realpython.com/python-walrus-operator/">walrus</a>
+            operator for compact view you may write mask for each row and add to
+            our <b class="code">return</b> statement:
+        </p>
         <pre class="brush: python">
-
+return [range((s:=start + row_ind*cols), s + cols)
+        for row_ind in range(rows)] 
         </pre>
     </div>
 </div>
 <div class="question-answer">
     <div class="question">
-        
+        But in this case all rows have ascending order. How to rearrange rows
+        with odd index? 
     </div>
     <div class="answer">
-        <p></p>
+        <p>Yes, you are right. For this purpose use build-in
+            <a target="_blank" href="https://www.w3schools.com/python/ref_func_sorted.asp">sorted()</a>
+        function with your <b class="code">range</b> function as the first argument, 
+        and argument <b class="code">reverse</b>.</p>
         <pre class="brush: python">
-
+return [sorted(range((s:=start + row_ind*cols), s + cols),
+               reverse=...)
+        for row_ind in range(rows)] 
+        </pre>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        What must be the value of <b class="code">reverse</b> argument?
+    </div>
+    <div class="answer">
+        <p>Your <b class="code">reverse</b> argument should become <b class="code">True</b>
+        for the rows with odd index in the grid. It means, that <b class="code">reverse</b>
+        is <b class="code">True</b> when <b class="code">row_ind</b> is <b class="code">1</b>,
+        <b class="code">3</b>, <b class="code">5</b> etc.</p>
+        <p>Such behavior may be easily
+        encoded with <a target="_blank" href="https://realpython.com/python-modulo-operator/">modulo</a>
+        operator, which return <b class="code">1</b> for odd numbers and <b class="code">0</b> for even
+        and knowing the fact that Python may interpreted (if necessary) <b class="code">0</b>
+        as <b class="code">False</b> and all other numbers as <b class="code">True</b>.</p>
+        <pre class="brush: python">
+return [sorted(range((s:=start + row_ind*cols), s + cols),
+               reverse=row_ind % 2)
+        for row_ind in range(rows)] 
         </pre>
     </div>
 </div>
@@ -45,10 +85,14 @@
         So, how my final solution should look like?
     </div>
     <div class="answer">
-        <p></p>
-        <p>Here it is:</p>
+        <p>All you need is add function definition.</p>
+        <p>Here is the whole solution:</p>
         <pre class="brush: python">
+def create_zigzag(rows: int, cols: int, start: int = 1) -> list[list[int]]:
 
+    return [sorted(range((s:=start + row_ind*cols), s + cols),
+                   reverse=row_ind % 2)
+            for row_ind in range(rows)] 
         </pre>
     </div>
 </div>
@@ -59,13 +103,38 @@
     </div>
     <div class="answer">
         <p>Sure, grab it!</p>
-        <p></p>
+        <p>In this solution you slice from infinite counter <b class="code">cols</b>
+        number of values and reverse rows if necessary. Since in Python index 
+        counting starts from 0, even element by natural order has odd index, so
+        <b class="code">-1</b> in odd power remains <b class="code">-1</b> and as
+        a step of slicing gives as reverse order.</p>
         <pre class="brush: python">
+from itertools import count, islice
+            
 
+def create_zigzag(rows: int, cols: int, start: int = 1) -> list[list[int]]:
+
+    it = count(start)
+
+    return [list(islice(it, cols))[::(-1)**row] for row in range(rows)]
         </pre>
-        <p></p>
+        <p>If any doubt remains, here is step-by-step solution, which should
+            be easier to understand after both previous.
+        </p>
         <pre class="brush: python">
+def create_zigzag(rows: int, cols: int, start: int = 1) -> list[list[int]]:
 
+    grid = []
+    for row_ind in range(rows):
+        row = []
+        for _ in range(cols):
+            row.append(start)
+            start += 1
+        if row_ind % 2:
+            row.reverse()
+        grid.append(row)
+
+    return grid
         </pre>
         <p>Click "Best solutions" at mission menu and see a lot of other
         interesting solutions!</p>
