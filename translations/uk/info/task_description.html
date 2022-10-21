@@ -1,0 +1,30 @@
+<!-- Describe task in general -->
+
+<p>   
+Твоя функція повинна створювати {% if is_js %}масив із масивів{% else %}список списків{% endif %},
+який представляє двовимірну ришітку із заданою кількістю рядків і колонок.
+Ця ришітка повинна містити цілі числа від <b class="code">start</b> до <b class="code">start + rows * cols - 1</b>
+у порядку зростання, але елементи кожного рядка з непарним індексом повинні йти в спадному порядку,
+тож коли читати числа у зростаючому порядку, вони йтимуть зигзагом у ришітці.
+</p>
+
+<p>
+    <strong>Вхідні дані:</strong> Два цілих числа - рядки і колонки. Одне необов'язкове ціле число - старт відліку.
+</p>
+
+<p>
+    <strong>Вихідні дані:</strong> {% if is_js %}Масив із масивів{% else %}Список із списків{% endif %}.
+</p>
+
+
+<!-- Put some usage examples -->
+<div class="for_info_only">
+    <p>
+        <strong>Приклади:</strong>
+    </p>
+
+<pre class="brush: {% if is_js %}javascript{% else %}python{% endif %}">{{init_code_tmpl}}</pre>
+</div>
+
+
+<p><i>Ця місія була взяти з курсу Python CCPS 109 осені 2018. Його викладав у Ryerson Chang School of Continuing Education <a target="_blank" href="http://www.scs.ryerson.ca/~ikokkari/">Ilkka Kokkarinen</a></i>.</p>

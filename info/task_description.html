@@ -1,66 +1,32 @@
 <!-- Describe task in general -->
 
 <p>
-    
-This function creates an {% if interpreter.slug == "js-node" %}Array of arrays.{% else %}List of lists.{% endif %} that represents a two-dimensional grid with the given number of rows and  cols. This grid should contain the integers from  <code>start</code> to  <code>start + rows * cols - 1</code> in ascending order, but the elements of every odd-numbered row have to be listed in descending order, so that when read in ascending order, the numbers zigzag through the two-dimensional grid.
+Your function should create {% if is_js %}an Array of Arrays{% else %}a list of lists{% endif %},
+that represents a two-dimensional grid with the given number of rows and cols.</p>
+<p>This grid should contain the {% if is_js %}numbers{% else %}integers{% endif %} from <b class="code">start</b> to
+<b class="code">start + rows * cols - 1</b> in ascending order, but the elements
+of every odd-index row have to be listed in descending order, so that when read
+in ascending order, the numbers zigzag through the two-dimensional grid.
 </p>
 
 <p>
-    <strong>Input: </strong> Two ints rows and cols. One optional argument start.
+    <strong>Input:</strong> Two {% if is_js %}numbers{% else %}integers{% endif %}
+    - rows and columns. One optional {% if is_js %}number{% else %}integer{% endif %} - start.
 </p>
 
 <p>
-    <strong>Output: </strong> {% if interpreter.slug == "js-node" %}Array of arrays.{% else %}List of lists.{% endif %}
+    <strong>Output:</strong> {% if is_js %}Array of Arrays{% else %}List of lists{% endif %}.
 </p>
 
 
 <!-- Put some usage examples -->
 <div class="for_info_only">
     <p>
-        <strong>Example:</strong>
+        <strong>Examples:</strong>
     </p>
 
-{% if interpreter.slug == "js-node" %}
-<pre class="brush: javascript">createZigzag(3, 5) == [
-        [1,2,3,4,5],
-        [10,9,8,7,6],
-        [11,12,13,14,15]
-    ]
-createZigzag(5, 1) == [
-        [1],
-        [2],
-        [3],
-        [4],
-        [5]
-    ]
-createZigzag(2, 3, 5) == [
-        [5, 6, 7],
-        [10, 9, 8],
-        [11, 12, 13]
-    ]
-</pre>
-{% else %}
-<pre class="brush: python">
-create_zigzag(3, 5) == [
-        [1,2,3,4,5],
-        [10,9,8,7,6],
-        [11,12,13,14,15]
-    ]
-create_zigzag(5, 1) == [
-        [1],
-        [2],
-        [3],
-        [4],
-        [5]
-    ]
-create_zigzag(3, 3, 5) == [
-        [5, 6, 7],
-        [10, 9, 8],
-        [11, 12, 13]
-    ]
-</pre>
-{% endif %}
+<pre class="brush: {% if is_js %}javascript{% else %}python{% endif %}">{{init_code_tmpl}}</pre>
 </div>
 
 
-<p><i>The mission was taken from Python CCPS 109 Fall 2018. It is taught for Ryerson Chang School of Continuing Education by <a href="http://www.scs.ryerson.ca/~ikokkari/">Ilkka Kokkarinen</a></i></p>
+<p><i>The mission was taken from Python CCPS 109 Fall 2018. It is taught for Ryerson Chang School of Continuing Education by <a target="_blank" href="http://www.scs.ryerson.ca/~ikokkari/">Ilkka Kokkarinen</a></i></p>
