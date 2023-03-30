@@ -88,6 +88,7 @@ return [sorted(range((s:=start + row_ind*cols), s + cols),
     <div class="answer">
         <p>All you need is add function definition.</p>
         <p>Here is the whole solution:</p>
+        <div class="spoiler">
         <pre class="brush: python">
 def create_zigzag(rows: int, cols: int, start: int = 1) -> list[list[int]]:
 
@@ -95,6 +96,7 @@ def create_zigzag(rows: int, cols: int, start: int = 1) -> list[list[int]]:
                    reverse=row_ind % 2)
             for row_ind in range(rows)] 
         </pre>
+        </div>
     </div>
 </div>
 <div class="question-answer">
@@ -109,6 +111,7 @@ def create_zigzag(rows: int, cols: int, start: int = 1) -> list[list[int]]:
         <p>
             In this solution you slice from infinite counter <b class="code">cols</b> number of values and reverse rows if necessary. Since in Python index counting starts from 0, even element by natural order has odd index, so <b class="code">-1</b> in odd power remains <b class="code">-1</b> and as a step of slicing gives as reverse order.
         </p>
+        <div class="spoiler">
         <pre class="brush: python">
 from itertools import count, islice
             
@@ -119,10 +122,12 @@ def create_zigzag(rows: int, cols: int, start: int = 1) -> list[list[int]]:
 
     return [list(islice(it, cols))[::(-1)**row] for row in range(rows)]
         </pre>
+        </div>
         <p>
             If any doubt remains, here is step-by-step solution, which should
             be easier to understand after both previous.
         </p>
+        <div class="spoiler">
         <pre class="brush: python">
 def create_zigzag(rows: int, cols: int, start: int = 1) -> list[list[int]]:
 
@@ -138,6 +143,7 @@ def create_zigzag(rows: int, cols: int, start: int = 1) -> list[list[int]]:
 
     return grid
         </pre>
+        </div>
         <p><b>
             Click "Best solutions" at mission menu and see a lot of other interesting solutions!
         </b></p>
