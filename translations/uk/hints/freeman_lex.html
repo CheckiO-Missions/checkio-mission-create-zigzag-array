@@ -86,6 +86,7 @@ return [sorted(range((s:=start + row_ind*cols), s + cols),
     <div class="answer">
         <p>Все, що тобі потрібно - це додати визначення функції.</p>
         <p>Ось повний розв'язок:</p>
+        <div class="spoiler">
         <pre class="brush: python">
 def create_zigzag(rows: int, cols: int, start: int = 1) -> list[list[int]]:
 
@@ -93,6 +94,7 @@ def create_zigzag(rows: int, cols: int, start: int = 1) -> list[list[int]]:
                    reverse=row_ind % 2)
             for row_ind in range(rows)] 
         </pre>
+        </div>
     </div>
 </div>
 <div class="question-answer">
@@ -106,6 +108,7 @@ def create_zigzag(rows: int, cols: int, start: int = 1) -> list[list[int]]:
         <p>Звісно, тримай!</p>
         <p>
             У цьому розв'язку ти "відтинаєш" від безкінечного лічильника <b class="code">cols</b> кількість значень і обертаєш рядки, якщо потрібно. Оскільки в Python нумерація індексів розпочинається з 0, парні елементи в нормальному порядку мають непарний індекс, тому <b class="code">-1</b> в непарному степені лишається <b class="code">-1</b> і як крок у зрізуванні дає нам зворотній порядок.</p>
+        <div class="spoiler">
         <pre class="brush: python">
 from itertools import count, islice
             
@@ -116,10 +119,12 @@ def create_zigzag(rows: int, cols: int, start: int = 1) -> list[list[int]]:
 
     return [list(islice(it, cols))[::(-1)**row] for row in range(rows)]
         </pre>
+        </div>
         <p>
             Якщо залишилися якісь сумніви, ось покроковий розв'язок, який повинен
             бути тобі більш зрозумілим за два попередні.
         </p>
+        <div class="spoiler">
         <pre class="brush: python">
 def create_zigzag(rows: int, cols: int, start: int = 1) -> list[list[int]]:
 
@@ -135,6 +140,7 @@ def create_zigzag(rows: int, cols: int, start: int = 1) -> list[list[int]]:
 
     return grid
         </pre>
+        </div>
         <p><b>
             Тисни "Best solutions" в меню місії і побачиш багато інших цікавих розв'язків!
         </b></p>
