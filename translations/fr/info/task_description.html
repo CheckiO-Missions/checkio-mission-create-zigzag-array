@@ -1,19 +1,16 @@
 <!-- Describe task in general -->
 
 <p>
-Votre fonction doit créer {% if is_js %}un tableau <span>(array)</span> de tableaux <span>(arrays)</span>{% else %} une liste <span>(list)</span> de listes <span>(lists)</span>{% endif %} , qui représente une grille à deux dimensions avec le nombre donné de lignes et de colonnes.</p>
-<p>Cette grille doit contenir les {% if is_js %}nombres <span>(numbers)</span>{% else %} entiers <span>(integers)</span>{% endif %} de <b class="code">start</b> à
-<b class="code">start + rows * cols - 1</b> par ordre croissant, mais les éléments
-de chaque ligne d'indice impair doivent être énumérés dans l'ordre décroissant, de sorte que, lorsqu'ils sont lus dans l'ordre croissant, les nombres z et z doivent être indiqués dans l'ordre décroissant
-dans l'ordre croissant, les nombres se déplacent en zigzag dans la grille bidimensionnelle.
+Votre fonction doit créer {% if is_js %}un tableau <span>(array)</span> de tableaux <span>(arrays)</span>{% else %}une liste <span>(list)</span> de listes <span>(lists)</span>{% endif %}, qui représente une grille à deux dimensions avec le nombre donné de lignes et de colonnes.</p>
+<p>Cette grille doit contenir les {% if is_js %}nombres <span>(numbers)</span>{% else %}entiers <span>(integers)</span>{% endif %} de <b class="code">start</b> à <b class="code">start + rows * cols - 1</b> par ordre croissant, mais les éléments de chaque ligne d'indice impair doivent être énumérés dans l'ordre décroissant, de sorte que, lorsqu'ils sont lus dans l'ordre croissant, les nombres z et z doivent être indiqués dans l'ordre décroissant dans l'ordre croissant, les nombres se déplacent en zigzag dans la grille bidimensionnelle.
 </p>
 
 <p>
-   <strong>Entrée:</strong> Deux nombres {% if is_js %} <span>(numbers)</span> {% else %} entiers <span>(integers)</span>{% endif %} - lignes et colonnes. Un nombre facultatif {% if is_js %} <span>(number)</span> {% else %} integer{% endif %} - début.
+   <strong>Entrée:</strong> Deux {% if is_js %}nombres <span>(numbers)</span>{% else %}entiers <span>(integers)</span>{% endif %} - lignes et colonnes. Un facultatif {% if is_js %}nombre <span>(number)</span>{% else %}entier <span>integer</span>{% endif %} - début.
 </p>
 
 <p>
-   <strong>Sortie:</strong> {% if is_js %}Tableau <span>(Array)</span> de tableaux <span>(Arrays)</span>{% else %} Liste <span>(List)</span> de listes <span>(lists)</span>{% endif %}.
+   <strong>Sortie:</strong> {% if is_js %}Tableau <span>(array)</span> de tableaux <span>(arrays)</span>{% else %}Liste <span>(list)</span> de listes <span>(lists)</span>{% endif %}.
 </p>
 
 
