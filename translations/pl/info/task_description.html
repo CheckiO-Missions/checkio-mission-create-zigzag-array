@@ -1,0 +1,30 @@
+<!-- Describe task in general -->
+
+<p>
+    Państwa funkcja powinna utworzyć {% if is_js %}tablicę <span>(array)</span> tablic <span>(arrays)</span>{% else %} listę <span>(list)</span> list <span>(lists)</span>{% endif %} , która reprezentuje dwuwymiarową siatkę z podaną liczbą wierszy i kolumn.
+</p>
+<p>
+    Siatka ta powinna zawierać liczby całkowite <span>{% if is_js %}(number){% else %}(int){% endif %}</span> od <b class="code">start</b> do
+<b class="code">start + rows * cols - 1</b> w porządku rosnącym, ale elementy każdego wiersza o nieparzystym indeksie muszą być wymienione w porządku malejącym, tak aby przy odczycie w porządku rosnącym liczby zygzakowały po dwuwymiarowej siatce.
+</p>
+
+<p>
+   <strong>Wejście:</strong> Dwie liczby całkowite <span>{% if is_js %}(number){% else %}(int){% endif %}</span> - wiersze i kolumny. Jedna opcjonalna liczba całkowita <span>{% if is_js %}(number){% else %}(int){% endif %}</span> - start.
+</p>
+
+<p>
+   <strong>Dane wyjściowe:</strong> {% if is_js %}Tablica{% else %}Lista{% endif %} <span>({% if is_js %}Array{% else %}List{% endif %})</span> tablic {% if is_js %}list{% else %}list{% endif %} <span>({% if is_js %}arrays{% else %}lists{% endif %})</span>.
+</p>
+
+
+<!-- Put some usage examples -->
+<div class="for_info_only">
+    <p>
+        <strong>Przykłady:</strong>
+    </p>
+
+<pre class="brush: {% if is_js %}javascript{% else %}python{% endif %}">{{init_code_tmpl}}</pre>
+</div>
+
+
+<p><i>Misja została zaczerpnięta z Python CCPS 109 Fall 2018. Jest on prowadzony dla Ryerson Chang School of Continuing Education przez <a target="_blank" href="http://www.scs.ryerson.ca/~ikokkari/">Ilkka Kokkarinen</a></i></p>
