@@ -1,0 +1,162 @@
+<body data-author="freeman_lex">
+<div class="question-answer">
+    <div class="question">
+        <p>
+            Nie mam pojęcia, jak zacząć rozwiązywać tę misję.
+        </p>
+    </div>
+    <div class="answer">
+        <p>
+            chodzi o to, aby w pętli <b class="code">rows</b> utworzyć odpowiednią liczbę wierszy, a w każdym z nich <b class="code">cols</b> odpowiednią liczbę elementów. Wiersze o nieparzystym indeksie w siatce wyników powinny być odwrócone.
+        </p>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        <p>
+            Od jakiego instrumentu powinienem zacząć?
+        </p>
+    </div>
+    <div class="answer">
+        <p>
+            Proszę użyć <a target="_blank" href="https://www.w3schools.com/python/python_lists_comprehension.asp">list comprehension</a> i <a target="_blank" href="https://www.w3schools.com/python/python_for_loops.asp">for loop</a>, aby utworzyć niezbędną liczbę wierszy poprzez iterację po <b class="code">rows</b> i już napisać instrukcję <b class="code">return</b> z ostateczną siatką (z pewnymi ukrytymi informacjami).
+        </p>
+        <pre class="brush: python">
+return [... for row_ind in range(rows)]
+        </pre>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        <p>
+            Jak utworzyć wiersze z różnymi wartościami?
+        </p>
+    </div>
+    <div class="answer">
+        <p>
+            Każdy element w siatce może być obliczany i pozycjonowany za pomocą <b class="code">start</b>, <b class="code">row_ind</b> i jego kolumny. Każdy wiersz może być zapisany jako zakres z krokiem 1 i długością <b class="code">cols</b>. Korzystając z tej logiki i operatora <a target="_blank" href="https://realpython.com/python-walrus-operator/">walrus</a> dla widoku kompaktowego, można napisać maskę dla każdego wiersza i dodać do naszej instrukcji <b class="code">return</b>:
+        </p>
+        <pre class="brush: python">
+return [range((s:=start + row_ind*cols), s + cols)
+        for row_ind in range(rows)] 
+        </pre>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        <p>
+            Ale w tym przypadku wszystkie wiersze mają kolejność rosnącą. Jak zmienić kolejność wierszy z nieparzystym indeksem? 
+        </p>
+    </div>
+    <div class="answer">
+        <p>
+            Tak, ma Pan rację. W tym celu należy użyć wbudowanej funkcji <a target="_blank" href="https://www.w3schools.com/python/ref_func_sorted.asp">sorted()</a> z funkcją <b class="code">range</b> jako pierwszym argumentem i argumentem <b class="code">reverse</b>.
+        </p>
+        <pre class="brush: python">
+return [sorted(range((s:=start + row_ind*cols), s + cols),
+               reverse=...)
+        for row_ind in range(rows)] 
+        </pre>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        <p>
+            Jaka musi być wartość argumentu <b class="code">reverse</b>?
+        </p>
+    </div>
+    <div class="answer">
+        <p>
+            Pana argument <b class="code">reverse</b> powinien stać się <b class="code">True</b> dla wierszy z nieparzystym indeksem w siatce. Oznacza to, że <b class="code">reverse</b> to <b class="code">True</b>, gdy <b class="code">row_ind</b> to <b class="code">1</b>, <b class="code">3</b>, <b class="code">5</b> itd.
+        </p>
+        <p>
+            Takie zachowanie można łatwo zakodować za pomocą operatora <a target="_blank" href="https://realpython.com/python-modulo-operator/">modulo</a>, który zwraca <b class="code">1</b> dla liczb nieparzystych i <b class="code">0</b> dla parzystych oraz wiedząc, że Python może interpretować (w razie potrzeby) <b class="code">0</b> jako <b class="code">False</b> i wszystkie inne liczby jako <b class="code">True</b>.
+        </p>
+        <pre class="brush: python">
+return [sorted(range((s:=start + row_ind*cols), s + cols),
+               reverse=row_ind % 2)
+        for row_ind in range(rows)] 
+        </pre>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        <p>
+            Jak więc powinno wyglądać moje ostateczne rozwiązanie?
+        </p>
+    </div>
+    <div class="answer">
+        <p>Wystarczy dodać definicję funkcji.</p>
+        <p>Oto całe rozwiązanie:</p>
+        <div class="spoiler">
+        <pre class="brush: python">
+def create_zigzag(rows: int, cols: int, start: int = 1) -> list[list[int]]:
+
+    return [sorted(range((s:=start + row_ind*cols), s + cols),
+                   reverse=row_ind % 2)
+            for row_ind in range(rows)] 
+        </pre>
+        </div>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        <p>
+            Proszę pokazać mi więcej rozwiązań!<br />
+            bo chcę być prawdziwym 🥇 Python Ninnjaa!
+        </p>
+    </div>
+    <div class="answer">
+       <p>Jasne, proszę łapać!</p>
+       <p> 
+            W tym rozwiązaniu proszę wyciąć z nieskończonego licznika <b class="code">cols</b> liczbę wartości i w razie potrzeby odwrócić wiersze. Ponieważ w Pythonie liczenie indeksów zaczyna się od 0, parzysty element w naturalnym porządku ma nieparzysty indeks, więc <b class="code">-1</b> w nieparzystej potędze pozostaje <b class="code">-1</b> i jako krok krojenia daje odwrotną kolejność </p>. <p>
+       </p>
+        <div class="spoiler">
+        <pre class="brush: python">
+from itertools import count, islice
+            
+
+def create_zigzag(rows: int, cols: int, start: int = 1) -> list[list[int]]:
+
+    it = count(start)
+
+    return [list(islice(it, cols))[::(-1)**row] for row in range(rows)]
+        </pre>
+        </div>
+       <p> 
+            Jeśli nadal istnieją jakiekolwiek wątpliwości, oto rozwiązanie krok po kroku, które powinno być
+            będzie łatwiejsze do zrozumienia po obu poprzednich.
+       </p>
+        <div class="spoiler">
+        <pre class="brush: python">
+def create_zigzag(rows: int, cols: int, start: int = 1) -> list[list[int]]:
+
+    grid = []
+    for row_ind in range(rows):
+        row = []
+        for _ in range(cols):
+            row.append(start)
+            start += 1
+        if row_ind % 2:
+            row.reverse()
+        grid.append(row)
+
+    return grid
+        </pre>
+        </div>
+       <p></p>Proszę kliknąć <b>Best Solutions</b> w menu misji i zobaczyć wiele innych ciekawych rozwiązań!</p>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        <p>
+            Dzięki! Teraz wiem i rozumiem więcej! Wszystko działa jak należy!
+        </p>
+    </div>
+    <div class="answer">
+        <p>
+            miło mi to słyszeć!
+        </p>
+    </div>
+</div>
+</body>
