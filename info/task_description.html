@@ -1,19 +1,19 @@
 <!-- Describe task in general -->
 
 <p>
-Your function should create {% if is_js %}an <span translate="repeat">array</span> of <span translate="repeat">arrays</span>{% else %}a <span translate="repeat">list</span> of <span translate="repeat">lists</span>{% endif %}, that represents a two-dimensional grid with the given number of rows and cols.</p>
-<p>This grid should contain the {% if is_js %}<span translate="repeat">numbers</span>{% else %}<span translate="repeat">integers</span>{% endif %} from <b class="code">start</b> to
-<b class="code">start + rows * cols - 1</b> in ascending order, but the elements
-of every odd-index row have to be listed in descending order, so that when read
-in ascending order, the numbers zigzag through the two-dimensional grid.
+    Your function should create {% if is_js %}an <span translate="repeat">array</span> of <span translate="repeat">arrays</span>{% else %}a <span translate="repeat">list</span> of <span translate="repeat">lists</span>{% endif %}, that represents a two-dimensional grid with the given number of rows and cols.
+</p>
+<p>
+    This grid should contain integers <span translate="no">{% if is_js %}(number){% else %}(int){% endif %}</span> from <b class="code">start</b> to
+<b class="code">start + rows * cols - 1</b> in ascending order, but the elements of every odd-index row have to be listed in descending order, so that when read in ascending order, the numbers zigzag through the two-dimensional grid.
 </p>
 
 <p>
-    <strong>Input:</strong> Two {% if is_js %}<span translate="repeat">numbers</span>{% else %}<span translate="repeat">integers</span>{% endif %} - rows and columns. One optional {% if is_js %}<span translate="repeat">number</span>{% else %}<span translate="repeat">integer</span>{% endif %} - start.
+    <strong>Input:</strong> Two integers <span translate="no">{% if is_js %}(number){% else %}(int){% endif %}</span> - rows and columns. One optional integer <span translate="no">{% if is_js %}(number){% else %}(int){% endif %}</span> - start.
 </p>
 
 <p>
-    <strong>Output:</strong> {% if is_js %}<span translate="repeat">Array</span> of <span translate="repeat">Arrays</span>{% else %}<span translate="repeat">List</span> of <span translate="repeat">lists</span>{% endif %}.
+    <strong>Output:</strong> <span translate="repeat">{% if is_js %}Array{% else %}List{% endif %}</span> of <span translate="repeat">{% if is_js %}arrays{% else %}lists{% endif %}</span>.
 </p>
 
 
