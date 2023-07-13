@@ -1,0 +1,162 @@
+<body data-author="freeman_lex">
+<div class="question-answer">
+    <div class="question">
+        <p>
+            我不知道如何开始解决这项任务。
+        </p>
+    </div>
+    <div class="answer">
+        <p>
+            💡 总体思路是在一个循环中创建<b class="code">rows</b> 行，每个行中有<b class="code">cols</b> 个适当的元素。结果网格中索引为奇数的行应反转。
+        </p>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        <p>
+            我应该从什么仪器开始？
+        </p>
+    </div>
+    <div class="answer">
+        <p>
+            使用<a target="_blank" href="https://www.w3schools.com/python/python_lists_comprehension.asp">list comprehension</a> 和<a target="_blank" href="https://www.w3schools.com/python/python_for_loops.asp">for loop</a> 在<b class="code">rows</b> 上迭代创建所需的行数，并在<b class="code">return</b> 语句中写入您的最终网格（包含一些隐藏信息）。
+        </p>
+        <pre class="brush: python">
+return [... for row_ind in range(rows)]
+        </pre>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        <p>
+            如何创建不同值的行？
+        </p>
+    </div>
+    <div class="answer">
+        <p>
+            网格中的每个元素都可以通过<b class="code">start</b>,<b class="code">row_ind</b> 和它的列来计算和定位。每一行都可以写成步长为1，长度为<b class="code">cols</b> 的范围。使用此逻辑和<a target="_blank" href="https://realpython.com/python-walrus-operator/">walrus</a> 运算符，您可以为每一行写入掩码，并添加到我们的<b class="code">return</b> 语句中：
+        </p>
+        <pre class="brush: python">
+return [range((s:=start + row_ind*cols), s + cols)
+        for row_ind in range(rows)] 
+        </pre>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        <p>
+            但是在这种情况下，所有记录都是升序排列。如何重新排列奇数索引的记录？ 
+        </p>
+    </div>
+    <div class="answer">
+        <p>
+            是的，您说的对。为此，请使用内置的<a target="_blank" href="https://www.w3schools.com/python/ref_func_sorted.asp">sorted()</a> 函数，以您的<b class="code">range</b> 函数作为第一个参数，参数<b class="code">reverse</b> 。
+        </p>
+        <pre class="brush: python">
+return [sorted(range((s:=start + row_ind*cols), s + cols),
+               reverse=...)
+        for row_ind in range(rows)] 
+        </pre>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        <p>
+            <b class="code">reverse</b> 参数的值是多少？
+        </p>
+    </div>
+    <div class="answer">
+        <p>
+            对于网格中索引为奇数的行，您的<b class="code">reverse</b> 参数应该变为<b class="code">True</b> 。这意味着，当<b class="code">row_ind</b> 是<b class="code">1</b>,<b class="code">3</b>,<b class="code">5</b> 等时，<b class="code">reverse</b> 就是<b class="code">True</b> 。
+        </p>
+        <p>
+            这样的行为可以很容易地用<a target="_blank" href="https://realpython.com/python-modulo-operator/">modulo</a> 运算符编码，奇数返回<b class="code">1</b> ，偶数返回<b class="code">0</b> ，并且 Python 可以解释 (如果需要)<b class="code">0</b> 为<b class="code">False</b> ，所有其他的数字为<b class="code">True</b> 。
+        </p>
+        <pre class="brush: python">
+return [sorted(range((s:=start + row_ind*cols), s + cols),
+               reverse=row_ind % 2)
+        for row_ind in range(rows)] 
+        </pre>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        <p>
+            那么，我的最终解决方案应该是怎样的呢？
+        </p>
+    </div>
+    <div class="answer">
+        <p>你只需要添加函数定义。</p>
+        <p>下面是整个解决方案：</p>
+        <div class="spoiler">
+        <pre class="brush: python">
+def create_zigzag(rows: int, cols: int, start: int = 1) -> list[list[int]]:
+
+    return [sorted(range((s:=start + row_ind*cols), s + cols),
+                   reverse=row_ind % 2)
+            for row_ind in range(rows)] 
+        </pre>
+        </div>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        <p>
+            告诉我更多的解决方案！<br />
+            因为我想成为一个真正的 🥇 Python Ninnjaa！
+        </p>
+    </div>
+    <div class="answer">
+       <p>当然，抓住它！</p>
+       <p> 
+            在这个解决方案中，你可以从无限计数器<b class="code">cols</b> 的值数中切分，必要时还可以倒排。因为在 Python 中索引计数从 0 开始，偶数元素按自然顺序具有奇数索引，所以<b class="code">-1</b> 在奇数幂中仍然是<b class="code">-1</b> ，作为切片的一步，给出了相反的顺序。
+       </p>
+        <div class="spoiler">
+        <pre class="brush: python">
+from itertools import count, islice
+            
+
+def create_zigzag(rows: int, cols: int, start: int = 1) -> list[list[int]]:
+
+    it = count(start)
+
+    return [list(islice(it, cols))[::(-1)**row] for row in range(rows)]
+        </pre>
+        </div>
+       <p> 
+            如果还有任何疑问，这里有一个逐步的解决方案。
+            如果您有任何疑问，请联系我们。
+       </p>
+        <div class="spoiler">
+        <pre class="brush: python">
+def create_zigzag(rows: int, cols: int, start: int = 1) -> list[list[int]]:
+
+    grid = []
+    for row_ind in range(rows):
+        row = []
+        for _ in range(cols):
+            row.append(start)
+            start += 1
+        if row_ind % 2:
+            row.reverse()
+        grid.append(row)
+
+    return grid
+        </pre>
+        </div>
+       <p></p>点击任务菜单<b>Best Solutions</b> ，查看更多有趣的解决方案！</p>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        <p>
+            谢谢！我现在知道并理解了更多！一切正常！
+        </p>
+    </div>
+    <div class="answer">
+        <p>
+            很高兴听到这个消息！
+        </p>
+    </div>
+</div>
+</body>
