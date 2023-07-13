@@ -1,0 +1,30 @@
+<!-- Describe task in general -->
+
+<p>
+    您的函数应该创建{% if is_js %}一个数组<span>(array)</span> of arrays<span>(arrays)</span>{% else %} 一个列表<span>(list)</span> of lists<span>(lists)</span>{% endif %} , 表示一个具有给定行数和列数的二维网格。
+</p>
+<p>
+    这个网格应该包含整数 <span>{% if is_js %}(number){% else %}(int){% endif %}</span>从<b class="code">start</b> 到
+<b class="code">start + rows * cols - 1</b> 的整数，但是每个奇数索引行中的元素必须以降序排列，这样当以升序读取时，数字就会在二维网格中蜿蜒曲折。
+</p>
+
+<p>
+   <strong>输入</strong>两个整数 <span>{% if is_js %}(number){% else %}(int){% endif %}</span> - 行和列。一个可选整数 <span>{% if is_js %}(number){% else %}(int){% endif %}</span> - 开始
+</p>
+
+<p>
+   <strong>输出：</strong> {% if is_js %}数组{% else %}列表{% endif %} <span>({% if is_js %}Array{% else %}List{% endif %})</span>的{% if is_js %}数组{% else %}列表{% endif %} <span>({% if is_js %}arrays{% else %}lists{% endif %})</span>.
+</p>
+
+
+<!-- Put some usage examples -->
+<div class="for_info_only">
+    <p>
+        <strong>示例：</strong>
+    </p>
+
+<pre class="brush: {% if is_js %}javascript{% else %}python{% endif %}">{{init_code_tmpl}}</pre>
+</div>
+
+
+<p><i>任务选自Python CCPS 109 Fall 2018。该课程由Ryerson Chang继续教育学院教授。<a target="_blank" href="http://www.scs.ryerson.ca/~ikokkari/">Ilkka Kokkarinen</a></i></p>
