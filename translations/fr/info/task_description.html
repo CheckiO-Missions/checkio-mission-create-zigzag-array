@@ -4,7 +4,9 @@
 Votre fonction doit créer {% if is_js %}un tableau <span>(array)</span> de tableaux <span>(arrays)</span>{% else %}une liste <span>(list)</span> de listes <span>(lists)</span>{% endif %}, qui représente une grille à deux dimensions avec le nombre donné de lignes et de colonnes.</p>
 <p>Cette grille doit contenir les {% if is_js %}nombres <span>(numbers)</span>{% else %}entiers <span>(integers)</span>{% endif %} de <b class="code">start</b> à <b class="code">start + rows * cols - 1</b> par ordre croissant, mais les éléments de chaque ligne d'indice impair doivent être énumérés dans l'ordre décroissant, de sorte que, lorsqu'ils sont lus dans l'ordre croissant, les nombres z et z doivent être indiqués dans l'ordre décroissant dans l'ordre croissant, les nombres se déplacent en zigzag dans la grille bidimensionnelle.
 </p>
-
+<p style="text-align: center;">
+    <img  title="example" src="{{MEDIA}}zigzag-array.png" alt="example" style="max-height: 200px"/>
+</p>
 <p>
    <strong>Entrée:</strong> Deux {% if is_js %}nombres <span>(numbers)</span>{% else %}entiers <span>(integers)</span>{% endif %} - lignes et colonnes. Un facultatif {% if is_js %}nombre <span>(number)</span>{% else %}entier <span>integer</span>{% endif %} - début.
 </p>
