@@ -1,0 +1,162 @@
+<body data-author="freeman_lex">
+<div class="question-answer">
+    <div class="question">
+        <p>
+            Ich habe keine Ahnung, wie ich mit der Lösung dieser Aufgabe beginnen soll.
+        </p>
+    </div>
+    <div class="answer">
+        <p>
+            💡 Die allgemeine Idee ist, in einer Schleife <b class="code">rows</b> eine Anzahl von Zeilen zu erstellen, mit <b class="code">cols</b> Anzahl der entsprechenden Elemente in jeder. Zeilen mit ungeradem Index im Ergebnisgitter sollten umgekehrt werden.
+        </p>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        <p>
+            Mit welchem Instrument soll ich beginnen?
+        </p>
+    </div>
+    <div class="answer">
+        <p>
+            Verwenden Sie <a target="_blank" href="https://www.w3schools.com/python/python_lists_comprehension.asp">list comprehension</a> und <a target="_blank" href="https://www.w3schools.com/python/python_for_loops.asp">for loop</a>, um die erforderliche Anzahl von Zeilen zu erstellen, indem Sie über <b class="code">rows</b> iterieren und schreiben Sie bereits die Anweisung <b class="code">return</b> mit Ihrem endgültigen Raster (mit einigen noch verborgenen Informationen).
+        </p>
+        <pre class="brush: python">
+return [... for row_ind in range(rows)]
+        </pre>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        <p>
+            Wie können Sie Zeilen mit unterschiedlichen Werten erstellen?
+        </p>
+    </div>
+    <div class="answer">
+        <p>
+            Jedes Element im Raster kann mit <b class="code">start</b>, <b class="code">row_ind</b> und seiner Spalte berechnet und positioniert werden. Jede Zeile kann als Bereich mit Schritt 1 und Länge <b class="code">cols</b> geschrieben werden. Mit dieser Logik und dem <a target="_blank" href="https://realpython.com/python-walrus-operator/">walrus</a> Operator für die Kompaktansicht können Sie für jede Zeile eine Maske schreiben und zu unserer <b class="code">return</b> Anweisung hinzufügen:
+        </p>
+        <pre class="brush: python">
+return [range((s:=start + row_ind*cols), s + cols)
+        for row_ind in range(rows)] 
+        </pre>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        <p>
+            Aber in diesem Fall sind alle Zeilen aufsteigend sortiert. Wie ordne ich Zeilen mit ungeradem Index neu an? 
+        </p>
+    </div>
+    <div class="answer">
+        <p>
+            Ja, Sie haben Recht. Verwenden Sie zu diesem Zweck die integrierte Funktion <a target="_blank" href="https://www.w3schools.com/python/ref_func_sorted.asp">sorted()</a> mit Ihrer Funktion <b class="code">range</b> als erstes Argument und dem Argument <b class="code">reverse</b>.
+        </p>
+        <pre class="brush: python">
+return [sorted(range((s:=start + row_ind*cols), s + cols),
+               reverse=...)
+        for row_ind in range(rows)] 
+        </pre>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        <p>
+            Was muss der Wert des Arguments <b class="code">reverse</b> sein?
+        </p>
+    </div>
+    <div class="answer">
+        <p>
+            Ihr <b class="code">reverse</b> Argument sollte <b class="code">True</b> für die Zeilen mit ungeradem Index im Raster werden. Das bedeutet, dass <b class="code">reverse</b> <b class="code">True</b> ist, wenn <b class="code">row_ind</b> <b class="code">1</b> , <b class="code">3</b>, <b class="code">5</b> usw. ist.
+        </p>
+        <p>
+            Ein solches Verhalten kann leicht mit dem <a target="_blank" href="https://realpython.com/python-modulo-operator/">modulo</a> Operator kodiert werden, der <b class="code">1</b> für ungerade Zahlen und <b class="code">0</b> für gerade Zahlen zurückgibt und der weiß, dass Python (falls nötig) <b class="code">0</b> als <b class="code">False</b> und alle anderen Zahlen als <b class="code">True</b> interpretieren kann.
+        </p>
+        <pre class="brush: python">
+return [sorted(range((s:=start + row_ind*cols), s + cols),
+               reverse=row_ind % 2)
+        for row_ind in range(rows)] 
+        </pre>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        <p>
+            Wie sollte also meine endgültige Lösung aussehen?
+        </p>
+    </div>
+    <div class="answer">
+        <p>Alles, was Sie brauchen, ist eine Funktionsdefinition hinzuzufügen.</p>
+        <p>Hier ist die gesamte Lösung:</p>
+        <div class="spoiler">
+        <pre class="brush: python">
+def create_zigzag(rows: int, cols: int, start: int = 1) -> list[list[int]]:
+
+    return [sorted(range((s:=start + row_ind*cols), s + cols),
+                   reverse=row_ind % 2)
+            for row_ind in range(rows)] 
+        </pre>
+        </div>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        <p>
+            Zeigen Sie mir mehr Lösungen!<br />
+            denn ich will ein echter 🥇 Python Ninnjaa sein!
+        </p>
+    </div>
+    <div class="answer">
+       <p>Klar, schnapp sie dir!</p>
+       <p>
+            Bei dieser Lösung schneiden Sie vom unendlichen Zähler <b class="code">cols</b> Anzahl der Werte ab und kehren bei Bedarf Zeilen um. Da in Python die Indexzählung bei 0 beginnt, hat ein gerades Element in natürlicher Reihenfolge einen ungeraden Index, so dass <b class="code">-1</b> in ungerader Potenz <b class="code">-1</b> bleibt und als Schritt der Zerlegung eine umgekehrte Reihenfolge ergibt.
+       </p>
+        <div class="spoiler">
+        <pre class="brush: python">
+from itertools import count, islice
+            
+
+def create_zigzag(rows: int, cols: int, start: int = 1) -> list[list[int]]:
+
+    it = count(start)
+
+    return [list(islice(it, cols))[::(-1)**row] for row in range(rows)]
+        </pre>
+        </div>
+       <p>
+            Wenn Sie noch Zweifel haben, finden Sie hier eine Schritt-für-Schritt-Lösung, die
+            die nach den beiden vorherigen einfacher zu verstehen sein sollte.
+       </p>
+        <div class="spoiler">
+        <pre class="brush: python">
+def create_zigzag(rows: int, cols: int, start: int = 1) -> list[list[int]]:
+
+    grid = []
+    for row_ind in range(rows):
+        row = []
+        for _ in range(cols):
+            row.append(start)
+            start += 1
+        if row_ind % 2:
+            row.reverse()
+        grid.append(row)
+
+    return grid
+        </pre>
+        </div>
+       <p></p>Klicken Sie auf <b>Best Solutions</b> im Missionsmenü und sehen Sie sich viele andere interessante Lösungen an!</p>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        <p>
+            Danke! Ich weiß und verstehe jetzt mehr! Alles funktioniert bestens!
+        </p>
+    </div>
+    <div class="answer">
+        <p>
+            👍 Freut mich zu hören!
+        </p>
+    </div>
+</div>
+</body>
