@@ -1,0 +1,32 @@
+<!-- Describe task in general -->
+
+<p>
+    Ihre Funktion sollte {% if is_js %}ein Array <span>(array)</span> von Arrays <span>(arrays)</span>{% else %} eine Liste <span>(list)</span> von Listen <span>(lists)</span>{% endif %} erstellen, die ein zweidimensionales Gitter mit der angegebenen Anzahl von Zeilen und Spalten darstellt.
+</p>
+<p>
+    Dieses Gitter sollte ganze Zahlen enthalten <span>{% if is_js %}(number){% else %}(int){% endif %}</span> von <b class="code">start</b> bis
+<b class="code">start + rows * cols - 1</b> in aufsteigender Reihenfolge enthalten, aber die Elemente jeder Zeile mit ungeradem Index müssen in absteigender Reihenfolge aufgelistet werden, so dass die Zahlen, wenn sie in aufsteigender Reihenfolge gelesen werden, im Zickzack durch das zweidimensionale Gitter laufen.
+</p>
+<p style="text-align: center;">
+    <img  title="example" src="{{MEDIA}}zigzag-array.png" alt="example" style="max-height: 200px"/>
+</p>
+<p>
+   <strong>Eingabe:</strong> Zwei ganze Zahlen <span>{% if is_js %}(number){% else %}(int){% endif %}</span> - zeilen und Spalten. Eine optionale ganze Zahl <span>{% if is_js %}(number){% else %}(int){% endif %}</span> - start.
+</p>
+
+<p>
+   <strong>Ausgabe:</strong> {% if is_js %}Array{% else %}Liste{% endif %} <span>({% if is_js %}Array{% else %}List{% endif %})</span> von {% if is_js %}Arrays{% else %}Listen{% endif %} <span>({% if is_js %}arrays{% else %}lists{% endif %})</span>.
+</p>
+
+
+<!-- Put some usage examples -->
+<div class="for_info_only">
+    <p>
+        <strong>Beispiele:</strong>
+    </p>
+
+<pre class="brush: {% if is_js %}javascript{% else %}python{% endif %}">{{init_code_tmpl}}</pre>
+</div>
+
+
+<p><i>Die Aufgabe wurde aus Python CCPS 109 Herbst 2018 übernommen. Sie wird für die Ryerson Chang School of Continuing Education unterrichtet von <a target="_blank" href="https://github.com/ikokkari">Ilkka Kokkarinen</a></i></p>
